@@ -69,7 +69,7 @@ Gapminder provides indicators from the following areas:
 
 ![](Gapminder.png)
 
-I made my way through all the given indicators, analysed different sets of variables and ended up with the 13 following variables:
+I made my way through all the given indicators, analysed different sets of variables and ended up with the 12 following variables:
 
 * [**Life expectancy**](https://www.gapminder.org/data/documentation/gd004/) - variable: life_expectancy
   + The average number of years a newborn child would live if current mortality patterns were to stay stable.
@@ -818,7 +818,7 @@ To make an informed decision, we first apply the summary function on the result 
 ```{r}
 summary(pca)
 ```
-It shows the proportion of variance explained by each principle component. In the third row, the cumulative proportion, we see that the first two PC already account for 69% of the total variation in the data. If we are happy with this number, we can discard the remaining information. But how are these proportions calculated?
+It shows the proportion of variance explained by each principle component. In the third row, the cumulative proportion, we see that the first two PCs  already account for 69% of the total variation in the data. If we are happy with this number, we can discard the remaining information. But how are these proportions calculated?
 
 The functionalities of the base R function `prcomp` are somewhat limited. We make use of the `factoextra` package, which helps in the interpretation and has severeral plotting options. Using the `get_eigenvalue` function, we see where the proportions actually came from. They represent the relative size of the eigenvalue corresponding to the eigenvector of the covariance matrix.
 
@@ -849,8 +849,8 @@ fviz_pca_ind(pca)
 However, so far, the principle components are a black box. We don't know which variables are driving these dimensions. What can we do about that? We can analyze the correlation between a variable (i.e. an indicator) and a principal component (PC) using the `get_pca_var` function or visualize these correlations using the `fviz_pca_var` function. 
 
 ```{r}
-variables <- get_pca_var(pca)
-variables$coord
+#variables <- get_pca_var(pca)
+#variables$coord
 ```
 
 ```{r}
@@ -868,7 +868,7 @@ corrplot(variables$cos2, is.corr=FALSE)
 ```
 
 ### Biplot
-Finally, we can plot both the athletes and the disciplines simultaneously in a so called bi-plot. This shows at the same time similarities of athletes, correlations of disciplines, and the link between athletes and disciplines.
+Finally, we can plot both the countries and the indicators simultaneously in a so called bi-plot. This shows at the same time similarities of countries, correlations of indicators, and the link between countries and indicators.
 ```{r}
 fviz_pca_biplot(pca)
 ```
@@ -881,7 +881,7 @@ Concerning the question, which indicators / factors make up the separation of Eu
 
 The three clusters differ in terms of (HDI) Human Development Index, income per person, freedom index, democracy index, CPI (Corruption Perception Index), broadband subscribers and internet users on the one hand, and in terms of income inequality on the other hand.
 
-Our **"North-Western" cluster** especially has **high values in the first dimension**, whereas our **"East-Southern" cluster has (very) low values**. The countries of our "middle-Southern" cluster are all more or less close to the origin and are therefore close to average in both categories.
+Our **"North-West" cluster** especially has **high values in the first dimension**, whereas our **"East-South" cluster has (very) low values**. The countries of our "middle-South" cluster are all more or less close to the origin and are therefore close to average in both categories.
 
 # Conclusion
 

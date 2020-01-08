@@ -7,4 +7,4 @@ These prejudices that still exist, led me to some questions:
 
 2. If it is true, what are the indicators / factors that make up this division respectively led to this division or maintain it? What are the differences between European countries based on? Are there overriding factors, that is, can we combine sub-factors to a major one? Can we transform variables from higher dimensions into a 1, 2 or 3-dimensional space?
 
-I answered these questions using clustering and PCA.
+I used clustering and PCA to answer these questions.

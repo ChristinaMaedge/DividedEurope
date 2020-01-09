@@ -106,9 +106,9 @@ As the data situation is poor for some variables and countries after the year 20
 
 ## Methods
 
-As outlined in the research question, we want to group countries, look for differences and similarities between countries. This can best be done with* **clustering**
+As outlined in the research question, we want to group countries, look for differences and similarities between countries. This can best be done with **clustering**
 
-To answer the second question and to find out major factors that make up possible differences between European countries, we can use* **PCA**. 
+To answer the second question and to find out major factors that make up possible differences between European countries, we can use **PCA**. 
 
 The following libraries need to be loaded for my analyzes:
 
@@ -393,7 +393,8 @@ grid.arrange(pcomplete, psingle, paverage, pward, nrow = 2)
 
 * The complete linkage method has produced a more compact cluster, 
 * while the single linkage method has produced long, “loose” clusters. 
-* The average linkage has produced a dendogram which is similar to the one of the complete linkage method but the branches are fused at a higher height and you can´t really tell where to cut the tree. * This is much easier when looking at the ward linkage method dendogram: we can easily make up 3 clusters. 
+* The average linkage has produced a dendogram which is similar to the one of the complete linkage method but the branches are fused at a higher height and you can´t really tell where to cut the tree. 
+* This is much easier when looking at the ward linkage method dendogram: we can easily make up 3 clusters. 
 
 **But which cluster tree is the most fitting one? Which linkage method shall we use? And where to cut the tree? Is there a measure that helps us?** Let´s try to verify the cluster tree in the next step.
 
@@ -577,7 +578,7 @@ pca <- prcomp(df_pca, center = TRUE, scale. = TRUE)
 ```
 
 ### Proportion of Variance
-To make an informed decision, we first apply the summary function on the result in order to look at the proportion of variance explained by the PCs.
+**To make an informed decision, we first apply the summary function on the result in order to look at the proportion of variance explained by the PCs.**
 
 ```{r}
 summary(pca)
@@ -599,29 +600,20 @@ Following the KG-criterion we would keep 2 PCs.
 fviz_eig(pca)
 ```
 
-Following this approach, we would also keep 2 PCs.
+**Following this approach, we would also keep 2 PCs.**
 
-### Visualizing countries
-We can quickly visualize the first two principal components. Now we see at one glance countries that are similar to each other. 
-```{r}
+```{r include=FALSE}
 fviz_pca_ind(pca)
 ```
-
-### Visualizing indicators
-However, so far, the principle components are a black box. We don't know which variables are driving these dimensions. What can we do about that? We can analyze the correlation between a variable (i.e. an indicator) and a principal component (PC) using the `get_pca_var` function or visualize these correlations using the `fviz_pca_var` function. 
 
 ```{r include=FALSE}
 variables <- get_pca_var(pca)
 variables$coord
 ```
 
-```{r}
+```{r include=FALSE}
 fviz_pca_var(pca)
 ```
-
-- In this plot, positively correlated variables are grouped together. 
-- Negatively correlated variables are positioned on opposite sides of the plot origin. 
-- If an arrow reaches the circle this implies that the variance in that variable is entirely captured by the first two principle components. If the arrows are short it indicates that they are poorely reflected.
 
 **To assess the quality of representation of variables more closely, we can use the `corrplot` function.** 
 
@@ -637,7 +629,7 @@ Finally, we can plot both the countries and the indicators simultaneously in a s
 fviz_pca_biplot(pca)
 ```
 
-The first principal component (x-axis) roughly corresponds to highly developed, democratic countries with high income, a high health and educational level, relatively high living standard and low corruption level. Countries such as Norway and Luxembourg have high rates, while states such as Albania, the Ukraine and Bosnia and Herzegovina have far lower rates. The second component (y-axis) is roughly explained as income inequality, which implies that in countries such as Turkey and Romania there is a high income inequality, while in Albania and in the Slovak Republic there is a fairly low income inequality. A country close to the origin, such as Cyprus or Poland, is close to average in both categories.
+The **first principal component** (x-axis) roughly corresponds to **highly developed, democratic countries with high income, a high health and educational level, relatively high living standard and low corruption level**. Countries such as Norway and Luxembourg have high rates, while states such as Albania, the Ukraine and Bosnia and Herzegovina have far lower rates. The **second principal component** (y-axis) is roughly explained as income inequality, which implies that in countries such as Turkey and Romania there is a high income inequality, while in Albania and in the Slovak Republic there is a fairly low income inequality. A country close to the origin, such as Cyprus or Poland, is close to average in both categories.
 
 ## Results
 
@@ -655,7 +647,7 @@ According to the results of the cluster analysis, there is no "two-class" Europe
 
 There is a **certain east-west separation**, but there is also some kind of **north-south separation**:
 
-* We can make out a certain “North-West” cluster“, a kind of ”middle-South" cluster** and a “East-South” cluster.
+* We can make out a certain “North-West” cluster“, a kind of ”middle-South" cluster and a “East-South” cluster.
 * Some countries seem to be somewhere in between the outer clusters. They haven´t made it up to the “North-West” cluster yet or, at some time, might have been member of that cluster but aren´t at the moment. But they are also clearly different from the “East-South” cluster.
 
 The three **clusters differ in terms of (HDI) Human Development Index, income per person, freedom index, democracy index, CPI (Corruption Perception Index), broadband subscribers and internet users on the one hand, and in terms of income inequality on the other hand**.
@@ -691,7 +683,6 @@ Sources:
 * https://www.rdocumentation.org/packages/base/versions/3.6.2/topics/scale
 * https://www.rdocumentation.org/packages/GGally/versions/1.4.0
 * https://www.rdocumentation.org/packages/psych/versions/1.9.12/topics/cluster.plot
-* https://www.datanovia.com/en/blog/cluster-analysis-in-r-simplified-and-enhanced/ 
 * https://rpkgs.datanovia.com/factoextra/reference/fviz_dend.html
 * https://www.r-bloggers.com/hierarchical-clustering-in-r-2/
 * https://www.datacamp.com/community/tutorials/hierarchical-clustering-R
